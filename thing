@@ -11,9 +11,15 @@ public class ConversionsProject {
 			System.out.print("What should your input be? ");
 			double num = input.nextDouble();
 			if (choiceA.toLowerCase().equals("feettoinches"))
-				System.out.println(feetToInches());
-			
-			
+				System.out.println(feetToInches(num));
+			else if (choiceA.toLowerCase().equals("milestofeet"))
+				System.out.println(milesToFeet(num));
+			else if (choiceA.toLowerCase().equals("yardstometers"))
+				System.out.println(milesToFeet(num));
+			else if (choiceA.toLowerCase().equals("poundstokilograms")
+				System.out.println(milesToFeet(num));
+			else
+				System.out.println("Sorry, that is not possible.");
 			while(!choice.equals("y") && !choice.equals("yeet") && !choice.equals("n")) {
 				System.out.print("Would you like to continue running? (y/n) ");
 				choice = num.nextLine();
