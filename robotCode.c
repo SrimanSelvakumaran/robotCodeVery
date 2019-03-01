@@ -73,7 +73,7 @@ void pre_auton() {
 			//Increment or decrement "count" based on button press
 			if(nLCDButtons == leftButton) {
 				waitForRelease();
-				count = 3;
+				count = 4;
 			}
 			else if(nLCDButtons == rightButton) {
 				waitForRelease();
@@ -122,11 +122,23 @@ void pre_auton() {
 			}
 			else if(nLCDButtons == rightButton) {
 				waitForRelease();
-				count = 0;
+				count++;
 			}
 			break;
-		default:
-			count = 0;
+		case 4:
+			//Display fourth choice
+			displayLCDCenteredString(0, "Skills");
+			displayLCDCenteredString(1, "<     Enter    >");
+			waitForPress();
+			//Increment or decrement "count" based on button press
+			if(nLCDButtons == leftButton) {
+				waitForRelease();
+				count--;
+			}
+			else if(nLCDButtons == rightButton) {
+				waitForRelease();
+				count = 0;
+			}
 			break;
 		}
 	}
@@ -149,15 +161,12 @@ task autonomous() {
 	case 1: //Cap Diagnal (Forwards)
 		setMotors(-128,-128);
 		motor[spinnythingy] = 128;
-		while(SensorValue(lightboi) > 490) {
-		wait1Msec(10);
-		}
-		setMotors(180,180);
+		while(SensorValue(lightboi) > 490) 
+			wait1Msec(10);
+		setMotors(128,128);
 		wait1Msec(500);
 		setMotors(0,0);
-
 		break;
-
 	case 2: // Right Side Flag (Backwards
 		motor[flipper] = -128;
 		wait1Msec(1500);
@@ -181,8 +190,15 @@ task autonomous() {
 		wait1Msec(250);
 		motor[flipper] = 0;
 		break;
-	case 0: default:
-		AutonomousCodePlaceholderForTesting();
+	case 4:
+		setMotors(-128,-128);
+		motor[spinnythingy] = 128;
+		wait1Msec(5000);
+		setMotors(128, -128);
+		wait1Msec(500);
+		setMotors(-128,-128);
+		wait1Msec(1000);
+		setMotors(128,128);
 		break;
 	}
 }
@@ -232,7 +248,7 @@ task usercontrol() {
 		motor[flipper] = (vexRT[Btn5U] - vexRT[Btn5D])*128*2/3;
 		motor[spinnythingy] = (vexRT[Btn8U] + vexRT[Btn8D] - vexRT[Btn7D])*128;
 		//if(SensorValue(lightboi) < 490) {
-		//	setMotors(180,180);
+		//	setMotors(128,128);
 		//	wait1Msec(500);
 		//	setMotors(0,0);
 		//	wait1Msec(10000);
